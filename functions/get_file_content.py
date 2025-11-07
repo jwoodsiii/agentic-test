@@ -1,5 +1,21 @@
 import os
-from functions.config import MAX_CHARS
+from config import MAX_CHARS
+from google.genai import types
+
+### Schema declaration for LLM function execution
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Prints contents of given file, constrained to given working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The path of the file that we want to print the contents of.",
+            ),
+        },
+    ),
+)
 
 
 def get_file_content(working_directory, file_path):

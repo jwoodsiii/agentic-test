@@ -1,4 +1,24 @@
 import os
+from google.genai import types
+
+### Schema declaration for LLM function execution
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="Write to the provided file, constrained to the working directory",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="Path to python file to execute",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="Content we write to the provided file.",
+            ),
+        },
+    ),
+)
 
 
 def write_file(working_directory, file_path, content):
